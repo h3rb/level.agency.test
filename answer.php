@@ -40,7 +40,7 @@ class rover_console {
  }
 
  private function draw_top() {
-  echo substr(',.-._.^.-.^--_.-.---.--.___.--^-._.-^.-^-._.-^-^.-._,.-._.^.-.^--_.-.---.--.___.--^-._.-^.-^-._.-^-^.-._',0,$this->w).PHP_EOL;
+  echo ' '.substr(',.-._.^.-.^--_.-.---.--.___.--^-._.-^.-^-._.-^-^.-._,.-._.^.-.^--_.-.---.--.___.--^-._.-^.-^-._.-^-^.-._',0,$this->w).PHP_EOL;
  }
 
  private function draw_side( $y, $right=0 ) {
@@ -50,11 +50,11 @@ class rover_console {
  
  private function draw_fill( $seed ) {
   $arr=array( '#','.','o', 'O', '#', ',', '\'', '`', '#', '#', '#', '#', '#' );
-  echo $arr[($this->pseudo+$seed)%count($arr)];
+  echo $arr[($seed*$seed*$seed+$this->pseudo/$seed)%count($arr)];
  }
 
  private function draw_bottom() {
-  echo substr('__.--^-._.-^.-^-._.-^-^.-._,.-._.^.-.^--_.-.---.--.,__.--^-._.-^.-^-._.-^-^.-._,.-._.^.-.^--_.-.---.--._',0,$this->w).PHP_EOL;
+  echo ' '.substr('__.--^-._.-^.-^-._.-^-^.-._,.-._.^.-.^--_.-.---.--.,__.--^-._.-^.-^-._.-^-^.-._,.-._.^.-.^--_.-.---.--._',0,$this->w).PHP_EOL;
  }
  
  private function rover_heading() {
