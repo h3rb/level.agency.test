@@ -48,7 +48,7 @@ class rover_console {
   echo $arr[($this->pseudo+$y+$right)%count($arr)];
  }
  
- private function draw_fill( $seed) {
+ private function draw_fill( $seed ) {
   $arr=array( ' ','.','o', 'O', ' ', ',', '\'', '`', ' ', ' ', ' ', ' ', ' ' );
   echo $arr[($this->pseudo+$seed)%count($arr)];
  }
@@ -175,6 +175,7 @@ class rover_console {
    q or Q to terminate communication with the rover.
    ? for help
 ';
+   return true;
   }
   if ( $parts[0] == 'q' || $parts['0'] == 'Q' ) return false;
   $this->process_movement($line);
