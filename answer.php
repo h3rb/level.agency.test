@@ -22,7 +22,7 @@
 // I have embellished the test a little bit by creating an ASCII 
 // console viewport, just to keep it interesting and express myself.
 
-// Note that the maximum width dimension is 100, but you are better off with 50 unless you have a wide term
+// Note that the maximum proper drawing width dimension is 100, but you are better off with 50 unless you have a wide term
 // There is no maximum height dimension but the minimum value for height is 4.
 // You can enter values that result in undesired effects, though, as I did protect against negative numbers etc.
 
