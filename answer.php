@@ -100,13 +100,13 @@ class rover_console {
   for ( $i=$this->h-1; $i >= 0; $i-- ) {
    $coord=$this->h-1-$i;
    $this->draw_side($i);
-   if ( $coord === $this->rov_y ) { 
+   if ( $i === $this->rov_y ) { 
     for ( $j=0; $j<$this->rov_x; $j++ ) $this->draw_fill($i+$j);  
     $this->draw_rover(); $j++;
     for ( ; $j<$this->w; $j++ ) $this->draw_fill($i+$j);  
    }
    $this->draw_side($i,1);
-   $this->draw_controls($i);
+   $this->draw_controls($coord);
    echo PHP_EOL;
   }
   $this->draw_bottom();
