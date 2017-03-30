@@ -7,6 +7,7 @@
 
 // Note that the maximum width dimension is 100, but you are better off with 50 unless you have a wide term
 // There is no maximum height dimension but the minimum value for height is 4.
+// You can enter values that result in undesired effects, though, as I didn't protect against negative numbers etc.
 
 define('ASCII_FUN','');
 
@@ -62,19 +63,81 @@ class rover_console {
   $this->pseudo=$w*$h+123897;
  }
  
+ function on_plateau() {
+  if ( $this->
+ }
+ 
+ function draw_rover() {
+  switch ( $this->rov_dir ) {
+   case 'N': echo '^'; break;
+   case 'S': echo 'V'; break;
+   case 'E': echo '>'; break;
+   case 'W': echo '<'; break;
+   default: echo '?'; break;
+  }
+ }
+ 
  function render() {
   $this->draw_top();
-  for ( $i=0; $i<$this->h; $i++ ) {
+  for ( $i=$this->h-1; $i >= 0; $i-- ) {
    $coord=$this->h-1-$i;
    $this->draw_side($i);
    if ( $coord === $this->rov_y ) { 
     for ( $j=0; $j<$this->rov_x; $j++ ) $this->draw_fill($i+$j);  
+    $this->draw_rover(); $j++;
+    for ( ; $j<$this->w; $j++ ) $this->draw_fill($i+$j);  
    }
    $this->draw_side($i,1);
    $this->draw_controls($i);
    echo PHP_EOL;
   }
   $this->draw_bottom();
+ }
+ 
+ function rover_left() {
+  switch ( $this->rov_dir ) {
+   case 'N': $this->rov_dir='W'; break;
+   case 'S': $this->rov_dir='E'; break;
+   case 'E': $this->rov_dir='N'; break;
+   case 'W': $this->rov_dir='S'; break;
+  }
+ }
+ 
+ function rover_right() {
+  switch ( $this->rov_dir ) {
+   case 'N': $this->rov_dir='E'; break;
+   case 'S': $this->rov_dir='W'; break;
+   case 'E': $this->rov_dir='S'; break;
+   case 'W': $this->rov_dir='N'; break;
+  }  
+ }
+ 
+ function rover_forward() {
+  switch ( $this->rov_dir ) {
+   case 'N': $this->rov_y+=1; break;
+   case 'E': $this->rov_x+=1; break;
+   case 'W': $this->rov_x-=1; break;
+   case 'S': $this->rov_y-=1; break;
+  }
+ }
+ 
+ function process_movement($cmds) {
+  $cmds=strtoupper(str_replace(" ",'',$cmds));
+  $parts=strsplit($cmds);
+  $valid=TRUE;
+  foreach ( $parts as $idx=>$cmd ) {
+   switch ( $cmd ) { case 'L': case 'M': case 'R': break; default: $valid=FALSE; break; }
+  }
+  if ( $valid === FALSE ) {
+   echo 'Rover rejected an invalid command sequence.'.PHP_EOL;
+   return;
+  }
+  foreach ( $parts as $idx=>$cmd ) {
+   switch ( $cmd ) {
+    case 'L': $this->rover_left(); break;
+    case 'M': $this->rover_forward(); break;
+    case 'R': $this->rover_right(); break;
+  }
  }
  
  function command_prompt() { 
@@ -113,9 +176,17 @@ class rover_console {
   }
   while ( 1 ) {
    $line = readline("Rover Calibration: ");
-   $parts=explode(" ",$line);
-   if ( isset($parts[2]) ) $parts[2]=strtoupper($parts[2]);
-   if ( count($parts) != 3 || !is_number($parts[0]) || !is_number($parts[1])  ) {
+   $parts=explode(" ",strtoupper($line));
+   if ( isset($parts[2]) ) {
+    $parts[2]=strtoupper($parts[2]);
+    $invalid=FALSE;
+    switch ( $parts[2] ) { case 'N': case 'E': case 'S': case 'W'; break; default: $invalid=TRUE; break;
+    if ( $valid === TRUE ) {
+     echo 'Input error! Expecting X<space>Y<space>N|S|E|W'.PHP_EOL;
+     continue;
+    }
+   }
+   if ( count($parts) != 3 || !is_number($parts[0]) || !is_number($parts[1]) ) {
     echo 'Input error! Expecting X<space>Y<space>N|S|E|W'.PHP_EOL;
     continue;
    }
@@ -135,7 +206,7 @@ class rover_console {
  public function __construct() {
   $this->setup();
   $this->loop();
-  $this->end();
+  $this->gameend();
  }
  
  public function gameover() { 
@@ -143,7 +214,7 @@ class rover_console {
   die();
  }
  
- public function end() {
+ public function gameend() {
   echo 'The last picture you see from the rover\'s camera is:\n';
   echo decipher('#########__.,,------.._+######,`"###_######_###"`.+#####/.__,#._##-=-#_"`####Y+####(.____.-.`######""`###j+#####VvvvvvV`.Y,.####_.,-`#######,#####,#####,+########Y####||,###`"\#########,/####,/####./+########|###,`##,#####`-..,`_,`/___,`/###,`/###,+###..##,;,,`,-`"\,`##,##.#####`#####`#""`#`--,/####..#..+#,`.#`.`---`#####`,#/##,#Y#-=-####,`###,###,.#.`-..||_||#..+ff\\`.#`._########/f#,`j#j#,#,`#,###,#f#,##\=\#Y###||#||`||_..+l`#\`#`.`."`-..,-`#j##/./#/,#,#/#,#/#/l#\###\=\l###||#``#||#||...+#`##`###`-._#`-.,-/#,`#/`"/-/-/-/-"```"`.`.##``.\--``--..``_``#||#,+############"`-_,`,##,`##f####,###/######`._####``._#####,##`-.``//#########,+##########,-"``#_.,-`####l_,-`_,,`##########"`-._#.#"`.#/|#####`.`\#,#######|+########,`,.,-`"##########\=)#,`-.#########,####`-`._`.V#|#######\#//#..#.#/j+########|f\\###############`._#)-."`.#####/|#########`.|#|########`.`-||-\\/+########l`#\`#################"`._###"`--`#j##########j`#j##########`-`---`+#########`##`#####################"`,-##,`/#######,-`"##/+#################################,`",__,-`#######/,,#,-`+#################################Vvv`############VVv`+');
   echo 'TTFN,BYE!'.PHP_EOL;
@@ -152,4 +223,4 @@ class rover_console {
 };
 
 $rover_game=new rover_console;
-
+echo 'The rover travelled '.$this->travelled.' Martian units this session.'.PHP_EOL;
