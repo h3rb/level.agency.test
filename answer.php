@@ -213,6 +213,7 @@ class rover_console {
    }
    $this->rov_x=intval($parts[0]);
    $this->rov_y=intval($parts[1]);
+   $this->rov_dir=$parts[2];
    if ( !$this->on_plateau() ) $this->gameover();
    break;
   }
