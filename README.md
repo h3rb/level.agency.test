@@ -49,7 +49,7 @@ The movement commands is made of a string consisting of ‘L’, ‘R’, ‘M�
 
 Output:
 The output that should be displayed will represent the rovers final co-ordinates and heading.
-
+```
 Test Input:
 •	Test One: 
 5 5
@@ -63,3 +63,4 @@ MMRMMRMRRM
 Expected Output:
 Test One – 1 3 N
 Test Two – 5 1 E
+```
