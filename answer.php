@@ -16,8 +16,14 @@ function decipher( $a ) {
 }
 
 class rover_console {
-
- var $w, $h, $rov_x, $rov_y, $rov_dir, $pseudo, $travelled;
+ 
+ var $w, $h, $rov_x, $rov_y, $rov_dir, $pseudo, $travelled; 
+ 
+ public function __construct() {
+  $this->setup();
+  $this->loop();
+  $this->gameend();
+ }
 
  function draw_top() {
   echo substr(',.-._.^.-.^--_.-.---.--.___.--^-._.-^.-^-._.-^-^.-._,.-._.^.-.^--_.-.---.--.___.--^-._.-^.-^-._.-^-^.-._',0,$this->w).PHP_EOL;
@@ -201,12 +207,6 @@ class rover_console {
    echo 'After the 40 minute round trip, the console updates...'.PHP_EOL;
    $this->render();
   }
- }
- 
- public function __construct() {
-  $this->setup();
-  $this->loop();
-  $this->gameend();
  }
  
  public function gameover() { 
