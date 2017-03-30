@@ -46,7 +46,7 @@ class rover_console {
   switch ( $idx ) {
    case 0: echo " ____________________"; break;
    case 1: echo '| N A S A MARS ROVER |'; break;
-   echo 2: echo '|'.str_pad("GPS: ".($this->rov_x.','.$this->rov_y),20).'|'; break;
+   case 2: echo '|'.str_pad(("GPS: ".$this->rov_x.','.$this->rov_y),20).'|'; break;
    case 3: echo '|'.str_pad("Heading: ",20).'|'; break;
    case 4: echo '|'.str_pad($this->rover_heading(),20).'|'; break;
    case 5: echo '|____________________|'; break;
