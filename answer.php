@@ -192,7 +192,7 @@ class rover_console {
    if ( isset($parts[2]) ) {
     $parts[2]=strtoupper($parts[2]);
     $invalid=FALSE;
-    switch ( $parts[2] ) { case 'N': case 'E': case 'S': case 'W'; break; default: $invalid=TRUE; break;
+    switch ( $parts[2] ) { case 'N': case 'E': case 'S': case 'W'; break; default: $invalid=TRUE; break; }
     if ( $valid === TRUE ) {
      echo 'Input error! Expecting X<space>Y<space>N|S|E|W'.PHP_EOL;
      continue;
@@ -214,7 +214,6 @@ class rover_console {
    $this->render();
   }
  }
-  
  
  private function gameover() { 
   echo decipher('###_________####__##_________###____#_####____________#+##/#____/###|##/##|/##/#____/##/#__#\#|##/#/#____/#__#\+#/#/#__/#/|#|#/#/|_/#/#__/####/#/#/#/#|#/#/#__/#/#/_/#/+/#/_/#/#___#|/#/##/#/#/___###/#/_/#/|#|/#/#/___/#_,#_/#+\____/_/##|_/_/##/_/_____/###\____/#|___/_____/_/#|_|##+#######################################################+YOU#DESTROYED#A#FIFTEEN#MILLION#DOLLAR+ROVER#ON#A#TWO#HUNDRED#MILLION#DOLLAR#MISSION!+');
