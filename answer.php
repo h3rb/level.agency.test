@@ -23,7 +23,7 @@ function is_number( $a ) {
 
 class rover_console {
  
- var $w, $h, $rov_x, $rov_y, $rov_dir, $pseudo, $travelled; 
+ var $w, $h, $rov_x, $rov_y, $rov_dir, $pseudo, $seeded_map, $travelled; 
  
  public function __construct() {
   $this->setup();
@@ -37,6 +37,9 @@ class rover_console {
   $this->h=$h;
   $this->pseudo=$w*$h+123897;
   echo 'Size of plateau: '.$this->w.' by '.$this->h.PHP_EOL;
+  // seed the map
+  $this->seeded_map=array();
+  $dim=$w*$h; for ( $i=0; $i<$dim; $i++ ) $this->seeded_map[]=rand();
  }
 
  private function draw_top() {
@@ -50,7 +53,7 @@ class rover_console {
  
  private function draw_fill( $seed ) {
   $arr=array( '#','.','o', 'O', ' ', ',', '\'', '`', ' ', ' ', '8', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' );
-  echo $arr[(rand()+$this->pseudo)%count($arr)];
+  echo $arr[$this->seeded_map[$seed%count($this->seeded_map)]%count($arr)];
  }
 
  private function draw_bottom() {
@@ -103,7 +106,7 @@ class rover_console {
    if ( $i === $this->rov_y ) { 
     for ( $j=0; $j<$this->rov_x; $j++ ) $this->draw_fill($i+$j);  
     $this->draw_rover(); $j++;
-    for ( ; $j<$this->w; $j++ ) $this->draw_fill($i+$j);  
+    for ( ; $j<$this->w; $j++ ) $this->draw_fill($i+$j);
    } else {
     for ( $j=0; $j<$this->w; $j++ ) $this->draw_fill($i+$j);  
    }
