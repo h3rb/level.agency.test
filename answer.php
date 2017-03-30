@@ -207,7 +207,7 @@ class rover_console {
   }
  } 
  
- function loop() {
+ private function loop() {
   $this->render();
   while ( $this->command_prompt() ) {
    echo 'After the 40 minute round trip, the console updates...'.PHP_EOL;
