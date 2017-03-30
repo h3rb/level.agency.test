@@ -104,6 +104,8 @@ class rover_console {
     for ( $j=0; $j<$this->rov_x; $j++ ) $this->draw_fill($i+$j);  
     $this->draw_rover(); $j++;
     for ( ; $j<$this->w; $j++ ) $this->draw_fill($i+$j);  
+   } else {
+    for ( $j=0; $j<$this->w; $j++ ) $this->draw_fill($i+$j);  
    }
    $this->draw_side($i,1);
    $this->draw_controls($coord);
