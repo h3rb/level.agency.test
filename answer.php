@@ -9,8 +9,6 @@
 // There is no maximum height dimension but the minimum value for height is 4.
 // You can enter values that result in undesired effects, though, as I didn't protect against negative numbers etc.
 
-define('ASCII_FUN','');
-
 function decipher( $a ) {
  $a=str_replace("+","\n",$a);
  $a=str_replace("#"," ",$a);
