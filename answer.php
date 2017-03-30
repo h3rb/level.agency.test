@@ -39,7 +39,7 @@ class rover_console {
   echo 'Size of plateau: '.$this->w.' by '.$this->h.PHP_EOL;
   // seed the map
   $this->seeded_map=array();
-  $dim=$w*$h; for ( $i=0; $i<$dim; $i++ ) $this->seeded_map[]=rand();
+  $dim=$w*$h; for ( $i=0; $i<$dim; $i++ ) $this->seeded_map[$i]=rand(strtotime('now'));
  }
 
  private function draw_top() {
@@ -53,7 +53,7 @@ class rover_console {
  
  private function draw_fill( $seed ) {
   $arr=array( '#','.','o', 'O', ' ', ',', '\'', '`', ' ', ' ', '8', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' );
-  echo $arr[$this->seeded_map[$seed%count($this->seeded_map)]%count($arr)];
+  echo $arr[($this->seeded_map[$seed%count($this->seeded_map)])%count($arr)];
  }
 
  private function draw_bottom() {
