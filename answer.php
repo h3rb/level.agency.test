@@ -62,7 +62,8 @@ class rover_console {
  }
  
  function on_plateau() {
-  if ( $this->
+  if ( $this->rov_x < 0 || $this->rov_y < 0 || $this->rov_x >= $this->w || $this->rov_y >= $this->h ) return FALSE;
+  return TRUE;
  }
  
  function draw_rover() {
@@ -157,6 +158,7 @@ class rover_console {
   }
   if ( $parts[0] == 'q' || $parts['0'] == 'Q' ) return false;
   $this->process_movement($line);
+  if ( !$this->on_plateau() ) $this->gameover();
   return true;
  }
  
@@ -209,6 +211,7 @@ class rover_console {
  
  public function gameover() { 
   echo decipher('###_________####__##_________###____#_####____________#+##/#____/###|##/##|/##/#____/##/#__#\#|##/#/#____/#__#\+#/#/#__/#/|#|#/#/|_/#/#__/####/#/#/#/#|#/#/#__/#/#/_/#/+/#/_/#/#___#|/#/##/#/#/___###/#/_/#/|#|/#/#/___/#_,#_/#+\____/_/##|_/_/##/_/_____/###\____/#|___/_____/_/#|_|##+#######################################################+YOU#DESTROYED#A#FIFTEEN#MILLION#DOLLAR+ROVER#ON#A#TWO#HUNDRED#MILLION#DOLLAR#MISSION!+');
+  echo 'The rover travelled '.$this->travelled.' Martian units this session.'.PHP_EOL;  
   die();
  }
  
