@@ -30,6 +30,14 @@ class rover_console {
   $this->loop();
   $this->gameend();
  }
+ 
+
+ private function set_size( $w, $h ) {
+  $this->w=$w;
+  $this->h=$h;
+  $this->pseudo=$w*$h+123897;
+  echo 'Size of plateau: '.$this->w.' by '.$this->h.PHP_EOL;
+ }
 
  private function draw_top() {
   echo substr(',.-._.^.-.^--_.-.---.--.___.--^-._.-^.-^-._.-^-^.-._,.-._.^.-.^--_.-.---.--.___.--^-._.-^.-^-._.-^-^.-._',0,$this->w).PHP_EOL;
@@ -70,12 +78,6 @@ class rover_console {
    default:break;
   }
   echo PHP_EOL;
- }
-
- private function set_size( $w, $h ) {
-  $this->w=$w;
-  $this->h=$h;
-  $this->pseudo=$w*$h+123897;
  }
  
  private function on_plateau() {
