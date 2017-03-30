@@ -37,12 +37,12 @@ class rover_console {
 
  private function draw_side( $y, $right=0 ) {
   $arr=array( '|',')','(', '<', '>' );
-  return $arr[($this->pseudo+$y+$right)%count($arr)];
+  echo $arr[($this->pseudo+$y+$right)%count($arr)];
  }
  
  private function draw_fill( $seed) {
   $arr=array( ' ','.','o', 'O', ' ', ',', '\'', '`', ' ', ' ', ' ', ' ', ' ' );
-  return $arr[($this->pseudo+$seed)%count($arr)];
+  echo $arr[($this->pseudo+$seed)%count($arr)];
  }
 
  private function draw_bottom() {
@@ -199,7 +199,7 @@ class rover_console {
     $parts[2]=strtoupper($parts[2]);
     $invalid=FALSE;
     switch ( $parts[2] ) { case 'N': case 'E': case 'S': case 'W'; break; default: $invalid=TRUE; break; }
-    if ( $valid === TRUE ) {
+    if ( $invalid === TRUE ) {
      echo 'Input error! Expecting X<space>Y<space>N|S|E|W'.PHP_EOL;
      continue;
     }
