@@ -7,7 +7,7 @@
 
 // Note that the maximum width dimension is 100, but you are better off with 50 unless you have a wide term
 // There is no maximum height dimension but the minimum value for height is 4.
-// You can enter values that result in undesired effects, though, as I didn't protect against negative numbers etc.
+// You can enter values that result in undesired effects, though, as I did protect against negative numbers etc.
 
 function decipher( $a ) {
  $a=str_replace("+","\n",$a);
@@ -165,7 +165,7 @@ class rover_console {
   while ( 1 ) {
    $line = readline("Plateau Dimensions: ");
    $parts=explode(" ",$line);
-   if ( count($parts) != 2 || !is_number($parts[0]) || !is_number($parts[1]) ) {
+   if ( count($parts) != 2 || !is_number($parts[0]) || !is_number($parts[1]) || intval($parts[0]) <= 0 || intval($parts[1]) <= 0 ) {
     echo 'Input error! Expecting X<space>Y'.PHP_EOL;
     continue;
    }
