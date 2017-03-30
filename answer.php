@@ -25,30 +25,35 @@ class rover_console {
   $this->gameend();
  }
 
- function draw_top() {
+ private function draw_top() {
   echo substr(',.-._.^.-.^--_.-.---.--.___.--^-._.-^.-^-._.-^-^.-._,.-._.^.-.^--_.-.---.--.___.--^-._.-^.-^-._.-^-^.-._',0,$this->w).PHP_EOL;
  }
 
- function draw_side( $y, $right=0 ) {
+ private function draw_side( $y, $right=0 ) {
   $arr=array( '|',')','(', '<', '>' );
   return $arr[($this->pseudo+$y+$right)%count($arr)];
  }
  
- function draw_fill( $seed) {
+ private function draw_fill( $seed) {
   $arr=array( ' ','.','o', 'O', ' ', ',', '\'', '`', ' ', ' ', ' ', ' ', ' ' );
   return $arr[($this->pseudo+$seed)%count($arr)];
  }
 
- function draw_bottom() {
+ private function draw_bottom() {
   echo substr('__.--^-._.-^.-^-._.-^-^.-._,.-._.^.-.^--_.-.---.--.,__.--^-._.-^.-^-._.-^-^.-._,.-._.^.-.^--_.-.---.--._',0,$this->w).PHP_EOL;
  }
  
- function rover_heading() {
+ private function rover_heading() {
   switch ( $this->rov_dir ) {
+   case 'N': return "North"; break;
+   case 'E': return "East"; break;
+   case 'W': return "West"; break;
+   case 'S': return "South"; break;
+   default: return "unknown!"; break;
   }
  }
  
- function draw_controls( $idx ) {
+ private function draw_controls( $idx ) {
   switch ( $idx ) {
    case 0: echo " ____________________"; break;
    case 1: echo '| N A S A MARS ROVER |'; break;
@@ -61,18 +66,18 @@ class rover_console {
   echo PHP_EOL;
  }
 
- function set_size( $w, $h ) {
+ private function set_size( $w, $h ) {
   $this->w=$w;
   $this->h=$h;
   $this->pseudo=$w*$h+123897;
  }
  
- function on_plateau() {
+ private function on_plateau() {
   if ( $this->rov_x < 0 || $this->rov_y < 0 || $this->rov_x >= $this->w || $this->rov_y >= $this->h ) return FALSE;
   return TRUE;
  }
  
- function draw_rover() {
+ private function draw_rover() {
   switch ( $this->rov_dir ) {
    case 'N': echo '^'; break;
    case 'S': echo 'V'; break;
@@ -82,7 +87,7 @@ class rover_console {
   }
  }
  
- function render() {
+ private function render() {
   $this->draw_top();
   for ( $i=$this->h-1; $i >= 0; $i-- ) {
    $coord=$this->h-1-$i;
@@ -99,7 +104,7 @@ class rover_console {
   $this->draw_bottom();
  }
  
- function rover_left() {
+ private function rover_left() {
   switch ( $this->rov_dir ) {
    case 'N': $this->rov_dir='W'; break;
    case 'S': $this->rov_dir='E'; break;
@@ -108,7 +113,7 @@ class rover_console {
   }
  }
  
- function rover_right() {
+ private function rover_right() {
   switch ( $this->rov_dir ) {
    case 'N': $this->rov_dir='E'; break;
    case 'S': $this->rov_dir='W'; break;
@@ -117,7 +122,7 @@ class rover_console {
   }  
  }
  
- function rover_forward() {
+ private function rover_forward() {
   switch ( $this->rov_dir ) {
    case 'N': $this->rov_y+=1; break;
    case 'E': $this->rov_x+=1; break;
@@ -126,7 +131,7 @@ class rover_console {
   }
  }
  
- function process_movement($cmds) {
+ private function process_movement($cmds) {
   $cmds=strtoupper(str_replace(" ",'',$cmds));
   $parts=strsplit($cmds);
   $valid=TRUE;
@@ -145,7 +150,7 @@ class rover_console {
   }
  }
  
- function command_prompt() { 
+ private function command_prompt() { 
   $line = trim(readline("Send Command (?=help): "));
   if ( strlen($line) === 0 ) return;
   $parts=explode(" ",$line);
@@ -168,7 +173,7 @@ class rover_console {
   return true;
  }
  
- function setup() {
+ private function setup() {
   $this->travelled=0;
   while ( 1 ) {
    $line = readline("Plateau Dimensions: ");
@@ -208,6 +213,20 @@ class rover_console {
    $this->render();
   }
  }
+  
+ 
+ private function gameover() { 
+  echo decipher('###_________####__##_________###____#_####____________#+##/#____/###|##/##|/##/#____/##/#__#\#|##/#/#____/#__#\+#/#/#__/#/|#|#/#/|_/#/#__/####/#/#/#/#|#/#/#__/#/#/_/#/+/#/_/#/#___#|/#/##/#/#/___###/#/_/#/|#|/#/#/___/#_,#_/#+\____/_/##|_/_/##/_/_____/###\____/#|___/_____/_/#|_|##+#######################################################+YOU#DESTROYED#A#FIFTEEN#MILLION#DOLLAR+ROVER#ON#A#TWO#HUNDRED#MILLION#DOLLAR#MISSION!+');
+  echo 'The rover travelled '.$this->travelled.' Martian units this session.'.PHP_EOL;  
+  die();
+ }
+ 
+ private function gameend() {
+  echo 'The last picture you see from the rover\'s camera is:\n';
+  echo decipher('#########__.,,------.._+######,`"###_######_###"`.+#####/.__,#._##-=-#_"`####Y+####(.____.-.`######""`###j+#####VvvvvvV`.Y,.####_.,-`#######,#####,#####,+########Y####||,###`"\#########,/####,/####./+########|###,`##,#####`-..,`_,`/___,`/###,`/###,+###..##,;,,`,-`"\,`##,##.#####`#####`#""`#`--,/####..#..+#,`.#`.`---`#####`,#/##,#Y#-=-####,`###,###,.#.`-..||_||#..+ff\\`.#`._########/f#,`j#j#,#,`#,###,#f#,##\=\#Y###||#||`||_..+l`#\`#`.`."`-..,-`#j##/./#/,#,#/#,#/#/l#\###\=\l###||#``#||#||...+#`##`###`-._#`-.,-/#,`#/`"/-/-/-/-"```"`.`.##``.\--``--..``_``#||#,+############"`-_,`,##,`##f####,###/######`._####``._#####,##`-.``//#########,+##########,-"``#_.,-`####l_,-`_,,`##########"`-._#.#"`.#/|#####`.`\#,#######|+########,`,.,-`"##########\=)#,`-.#########,####`-`._`.V#|#######\#//#..#.#/j+########|f\\###############`._#)-."`.#####/|#########`.|#|########`.`-||-\\/+########l`#\`#################"`._###"`--`#j##########j`#j##########`-`---`+#########`##`#####################"`,-##,`/#######,-`"##/+#################################,`",__,-`#######/,,#,-`+#################################Vvv`############VVv`+');
+  echo 'TTFN,BYE!'.PHP_EOL;
+ }
+  
 };
 
 $rover_game=new rover_console;
