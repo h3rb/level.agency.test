@@ -39,7 +39,11 @@ class rover_console {
   echo 'Size of plateau: '.$this->w.' by '.$this->h.PHP_EOL;
   // seed the map
   $this->seeded_map=array();
-  $dim=$w*$h; for ( $i=0; $i<$dim; $i++ ) $this->seeded_map[$i]=rand(strtotime('now'));
+  $dim=$w*$h;
+  mt_srand($dim);
+  for ( $i=0; $i<$dim; $i++ ) {
+   $this->seeded_map[$i]=random_int();
+  }
  }
 
  private function draw_top() {
