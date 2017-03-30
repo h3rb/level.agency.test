@@ -145,6 +145,7 @@ class rover_console {
    case 'W': $this->rov_x-=1; break;
    case 'S': $this->rov_y-=1; break;
   }
+  $this->travelled++;
  }
  
  private function process_movement($cmds) {
