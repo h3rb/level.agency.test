@@ -49,8 +49,8 @@ class rover_console {
  }
  
  private function draw_fill( $seed ) {
-  $arr=array( '#','.','o', 'O', '#', ',', '\'', '`', '#', '#', '#', '#', '#' );
-  echo $arr[($seed*$seed*$seed+$this->pseudo/$seed)%count($arr)];
+  $arr=array( '#','.','o', 'O', ' ', ',', '\'', '`', ' ', ' ', '8', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' );
+  echo $arr[(rand()+$this->pseudo)%count($arr)];
  }
 
  private function draw_bottom() {
