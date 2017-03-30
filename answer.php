@@ -42,7 +42,7 @@ class rover_console {
   $dim=$w*$h;
   mt_srand($dim);
   for ( $i=0; $i<$dim; $i++ ) {
-   $this->seeded_map[$i]=random_int();
+   $this->seeded_map[$i]=random_int(0,10000000+$dim);
   }
  }
 
