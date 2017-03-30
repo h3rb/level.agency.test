@@ -16,7 +16,7 @@ function decipher( $a ) {
 }
 
 function is_number( $a ) {
- $b=strsplit($a);
+ $b=str_split($a);
  foreach ($b as $c)switch($c){case '0':case '1':case '2':case '3': case '4':case '5':case '6':case '7':case '8':case '9':break;default:return FALSE;break;}
  return TRUE;
 }
@@ -139,7 +139,7 @@ class rover_console {
  
  private function process_movement($cmds) {
   $cmds=strtoupper(str_replace(" ",'',$cmds));
-  $parts=strsplit($cmds);
+  $parts=str_split($cmds);
   $valid=TRUE;
   foreach ( $parts as $idx=>$cmd ) {
    switch ( $cmd ) { case 'L': case 'M': case 'R': break; default: $valid=FALSE; break; }
