@@ -147,6 +147,7 @@ class rover_console {
     case 'L': $this->rover_left(); break;
     case 'M': $this->rover_forward(); break;
     case 'R': $this->rover_right(); break;
+   }
   }
  }
  
