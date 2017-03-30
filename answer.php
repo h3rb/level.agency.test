@@ -211,7 +211,9 @@ class rover_console {
     echo 'Input error! Expecting X<space>Y<space>N|S|E|W'.PHP_EOL;
     continue;
    }
-   $this->set_size(intval($parts[0]),intval($parts[1]));
+   $this->rov_x=intval($parts[0]);
+   $this->rov_y=intval($parts[1]);
+   if ( !$this->on_plateau() ) $this->gameover();
    break;
   }
  } 
