@@ -239,4 +239,4 @@ class rover_console {
 };
 
 $rover_game=new rover_console;
-echo 'The rover travelled '.$this->travelled.' Martian units this session.'.PHP_EOL;
+echo 'The rover travelled '.$rover_game->travelled.' Martian units this session.'.PHP_EOL;
