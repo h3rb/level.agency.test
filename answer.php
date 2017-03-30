@@ -44,12 +44,12 @@ class rover_console {
  }
 
  private function draw_side( $y, $right=0 ) {
-  $arr=array( '|',')','(', '<', '>' );
+  $arr=array( '|',')','(', );
   echo $arr[($this->pseudo+$y+$right)%count($arr)];
  }
  
  private function draw_fill( $seed ) {
-  $arr=array( ' ','.','o', 'O', ' ', ',', '\'', '`', ' ', ' ', ' ', ' ', ' ' );
+  $arr=array( '#','.','o', 'O', '#', ',', '\'', '`', '#', '#', '#', '#', '#' );
   echo $arr[($this->pseudo+$seed)%count($arr)];
  }
 
@@ -107,7 +107,6 @@ class rover_console {
    }
    $this->draw_side($i,1);
    $this->draw_controls($coord);
-   echo PHP_EOL;
   }
   $this->draw_bottom();
  }
