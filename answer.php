@@ -108,11 +108,11 @@ class rover_console {
    $coord=$this->h-1-$i;
    $this->draw_side($i);
    if ( $i === $this->rov_y ) { 
-    for ( $j=0; $j<$this->rov_x; $j++ ) $this->draw_fill($i+$j);  
+    for ( $j=0; $j<$this->rov_x; $j++ ) $this->draw_fill($i+$j*$this->w);  
     $this->draw_rover(); $j++;
-    for ( ; $j<$this->w; $j++ ) $this->draw_fill($i+$j);
+    for ( ; $j<$this->w; $j++ ) $this->draw_fill($i+$j*$this->w);
    } else {
-    for ( $j=0; $j<$this->w; $j++ ) $this->draw_fill($i+$j);  
+    for ( $j=0; $j<$this->w; $j++ ) $this->draw_fill($i+$j*$this->w);  
    }
    $this->draw_side($i,1);
    $this->draw_controls($coord);
