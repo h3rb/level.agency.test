@@ -32,6 +32,7 @@ Thanks for your interest in Level Interactive and good luck!
 
 
 
+
 A rover has recently landed on a plateau on Mars by NASA.  This particular plateau is curiously rectangular and must be navigated by the rover so that the on-board cameras can have a complete view of the surrounding terrain to send back to Mission Control on Earth.
 
 The rover’s position and location is represented by a combination of x and y co-ordinates and a letter representing one of the four cardinal compass points. The plateau is divided up into a grid system to simplify navigation.  An example position might be 5, 5, S, which means the rover is in the top left corner facing South.
@@ -64,3 +65,10 @@ Expected Output:
 Test One – 1 3 N
 Test Two – 5 1 E
 ```
+
+
+
+
+Well, I did not get offered the job of "Front End Developer", but I did run this test through Kiuwan.com Code Review and scored a 5/5 on Security.
+
+[![Kiuwan](https://www.kiuwan.com/github/h3rb/level.agency.test/badges/security.svg)](https://www.kiuwan.com/github/h3rb/level.agency.test)
