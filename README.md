@@ -1,6 +1,7 @@
 # level.agency.test
 Y3t @n0th3r d@n9 t3st 4 l33t haxx0rs
 
+Click here to run it on Repl.it and play with it immediately: [![Run on Repl.it](https://repl.it/badge/github/h3rb/level.agency.test)](https://repl.it/github/h3rb/level.agency.test)
 
 # Test content
 
